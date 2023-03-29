@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-
-import { AccountModule } from './modules';
+import { AccountModule } from './account.module';
+import * as path from 'path';
 
 @Module({
   imports: [
@@ -16,8 +16,12 @@ import { AccountModule } from './modules';
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      entities: [`${__dirname}/**/*.entity{.js,.ts}`],
-      migrations: [`${__dirname}/**/database/migrations/*{.js,.ts}`],
+      entities: [
+        path.join(`${process.cwd()}`, 'dist', '**', '*.entity{.js,.ts}'),
+      ],
+      migrations: [
+        path.join(`${process.cwd()}`, 'dist', '**', 'migrations', '*{.js,.ts}'),
+      ],
       migrationsRun: true,
     }),
     AccountModule,

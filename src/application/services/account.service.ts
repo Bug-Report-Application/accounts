@@ -1,7 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { AccountRepository } from '../repositories';
-import { AccountDto } from '../dtos';
-import { AccountMapper } from '../mappers';
+import { AccountModel, AccountMapper } from '../../domain';
 
 @Injectable()
 export class AccountService {
@@ -10,7 +9,7 @@ export class AccountService {
     private readonly _accountMapper: AccountMapper,
   ) {}
 
-  async getAll(): Promise<AccountDto[]> {
+  async getAll(): Promise<AccountModel[]> {
     try {
       const result = await this._accountRepository.getAll();
       return this._accountMapper.entitiesToDto(result);

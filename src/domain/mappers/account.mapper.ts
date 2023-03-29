@@ -1,8 +1,8 @@
-import { AccountDto } from '../dtos';
-import { AccountEntity } from '../entities';
+import { AccountEntity } from '../../database/entities/account.entity';
+import { AccountModel } from '../models';
 
 export class AccountMapper {
-  entotyToDto(account: AccountEntity): AccountDto {
+  entotyToDto(account: AccountEntity): AccountModel {
     return {
       id: account.id,
       createdAt: account.createdAt,
@@ -12,7 +12,7 @@ export class AccountMapper {
     };
   }
 
-  entitiesToDto(accounts: AccountEntity[]): AccountDto[] {
+  entitiesToDto(accounts: AccountEntity[]): AccountModel[] {
     return accounts.map((account: AccountEntity) => {
       return this.entotyToDto(account);
     });
