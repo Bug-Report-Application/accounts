@@ -1,4 +1,4 @@
-export interface AccountDto {
+export interface AccountModel {
   id?: number;
   createdAt?: string;
   updatedAt?: string;
