@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccountRepository, AccountService } from '../../application';
 import { AccountController } from '../controllers';
 import { AccountMapper } from '../../domain/mappers';
-import { AccountEntity } from '../../database/entities/account.entity';
+import { AccountEntity } from '../../database';
 
 @Module({
   imports: [TypeOrmModule.forFeature([AccountEntity])],
