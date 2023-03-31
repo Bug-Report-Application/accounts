@@ -1,8 +1,8 @@
 {
-  "name": "server",
+  "name": "bug-report-application-server",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "https://github.com/diegomunizdev",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {

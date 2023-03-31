@@ -1,4 +1,4 @@
-import { AccountEntity } from '../../database/entities/account.entity';
+import { AccountEntity } from '../../database';
 import { AccountModel } from '../models';
 
 export class AccountMapper {
