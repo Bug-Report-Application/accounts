@@ -1,0 +1,38 @@
+version: '3.1'
+
+services:
+  database:
+    container_name: database_account_service
+    image: postgres
+    restart: always
+    networks:
+      - bug_report
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./pgdata/data:/var/lib/postgres/data
+
+  accounts:
+    container_name: account_service
+    build: .
+    depends_on:
+      - database
+    networks:
+      - bug_report
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/accounts
+    environment:
+      - POSTGRES_HOST=database_account_service
+      - POSTGRES_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+
+networks:
+  bug_report:
