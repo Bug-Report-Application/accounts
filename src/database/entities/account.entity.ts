@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
 } from 'typeorm';
+import { AccountType } from '../../domain';
 
 @Entity('accounts')
 export class AccountEntity {
@@ -25,4 +27,10 @@ export class AccountEntity {
 
   @Column()
   password: boolean;
+
+  @Column({ name: 'main_account_id', nullable: true })
+  mainAccountId: number;
+
+  @Column()
+  type: AccountType;
 }

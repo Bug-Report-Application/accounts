@@ -2,6 +2,7 @@ import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AccountEntity } from '../../database';
+import { AccountFilters } from '../../domain';
 
 @Injectable()
 export class AccountRepository {
@@ -10,7 +11,19 @@ export class AccountRepository {
     private readonly _accountRepository: Repository<AccountEntity>,
   ) {}
 
-  getAll(): Promise<AccountEntity[]> {
-    return this._accountRepository.find();
+  async getById(id: number): Promise<AccountEntity> {
+    return await this._accountRepository.findOne({
+      where: {
+        id,
+      },
+    });
+  }
+
+  async getAll(filters: AccountFilters): Promise<AccountEntity[]> {
+    return await this._accountRepository.find({
+      order: filters.order,
+      skip: filters.offset,
+      take: filters.limit,
+    });
   }
 }

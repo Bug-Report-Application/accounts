@@ -1,4 +1,4 @@
-import { AccountMapper } from '../../../domain';
+import { AccountFilters, AccountMapper } from '../../../domain';
 import { AccountRepository, AccountService } from '../../../application';
 import { AccountController } from '../account.controller';
 import { mockAccountsModelResponse } from '../../../mock';
@@ -22,7 +22,14 @@ describe('AccountController', () => {
           Promise.resolve(mockAccountsModelResponse),
         );
 
-      expect(await accountController.getAll()).toBe(mockAccountsModelResponse);
+      const filters: AccountFilters = {
+        offset: 1,
+        limit: 10,
+      };
+
+      expect(await accountController.getAll(filters)).toBe(
+        mockAccountsModelResponse,
+      );
     });
   });
 });
